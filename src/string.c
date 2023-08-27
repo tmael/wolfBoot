@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* string.h
  *
  * Implementations of standard library functions to eliminate external dependencies.

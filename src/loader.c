@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* loader.c
  *
  * Copyright (C) 2021 wolfSSL Inc.
@@ -35,21 +38,6 @@
 #include "spi_flash.h"
 #include "uart_flash.h"
 #include "wolfboot/wolfboot.h"
-
-#ifdef RAM_CODE
-/**
- * @brief Start address of the text section in RAM code.
- */
-extern unsigned int _start_text;
-/**
- * @brief wolfBoot version number (used in RAM code).
- */
-static volatile const uint32_t __attribute__((used)) wolfboot_version = WOLFBOOT_VERSION;
-/**
- * @brief RAM Interrupt Vector table.
- */
-extern void (** const IV_RAM)(void);
-#endif
 
 #ifdef PLATFORM_sim
 /**

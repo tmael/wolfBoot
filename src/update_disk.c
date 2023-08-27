@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* update_disk.c
  *
  * Implementation for RAM based updater, for systems that provide

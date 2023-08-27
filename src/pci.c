@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* pci.c
  *
  * Copyright (C) 2023 wolfSSL Inc.
@@ -537,29 +540,6 @@ static int pci_program_bars(uint8_t bus, uint8_t dev, uint8_t fun,
 static uint32_t pci_enum_bus(uint8_t bus, struct pci_enum_info *info);
 
 #ifdef DEBUG_PCI
-static void pci_dump_bridge(uint8_t bus, uint8_t dev, uint8_t fun)
-{
-    uint16_t mbase, mlimit;
-    uint16_t pfbase, pflimit;
-    uint8_t iobase, iolimit;
-    uint8_t prim, sec, ssb;
-
-    mbase = pci_config_read16(bus, dev, fun, PCI_MMIO_BASE_OFF);
-    mlimit = pci_config_read16(bus, dev, fun, PCI_MMIO_LIMIT_OFF);
-    pfbase = pci_config_read16(bus, dev, fun, PCI_PREFETCH_BASE_OFF);
-    pflimit = pci_config_read16(bus, dev, fun, PCI_PREFETCH_LIMIT_OFF);
-    iobase = pci_config_read8(bus, dev, fun, PCI_IO_BASE_OFF);
-    iolimit = pci_config_read8(bus, dev, fun, PCI_IO_LIMIT_OFF);
-    prim = pci_config_read8(bus, dev, fun, PCI_PRIMARY_BUS);
-    sec = pci_config_read8(bus, dev, fun, PCI_SECONDARY_BUS);
-    ssb = pci_config_read8(bus, dev, fun, PCI_SUB_SEC_BUS);
-
-    PCI_DEBUG_PRINTF("mbase: 0x%x, mlimit: 0x%x\n\r", mbase, mlimit);
-    PCI_DEBUG_PRINTF("pfbase: 0x%x, pflimit: 0x%x\n\r", pfbase, pflimit);
-    PCI_DEBUG_PRINTF("iobase: 0x%x, iolimit: 0x%x\n\r", iobase, iolimit);
-    PCI_DEBUG_PRINTF("prim: 0x%x, sec: 0x%x, ssb: 0x%x\n\r", prim, sec, ssb);
-
-}
 #else
 static inline void pci_dump_bridge(uint8_t bus, uint8_t dev, uint8_t fun)
 {

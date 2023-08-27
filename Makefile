@@ -173,6 +173,11 @@ tpmtools:
 	@$(MAKE) -C tools/tpm -s clean
 	@$(MAKE) -C tools/tpm -j
 
+swtpmtools:
+	@echo "Building TPM tools"
+	@$(MAKE) -C tools/tpm -s clean
+	@$(MAKE) -C tools/tpm -j swtpm
+
 test-app/image_v1_signed.bin: $(BOOT_IMG)
 	@echo "\t[SIGN] $(BOOT_IMG)"
 	$(Q)(test $(SIGN) = NONE) || "$(SIGN_TOOL)" $(SIGN_OPTIONS) $(BOOT_IMG) $(PRIVATE_KEY) 1
@@ -252,7 +257,7 @@ keys: $(PRIVATE_KEY)
 
 clean:
 	$(Q)rm -f src/*.o hal/*.o hal/spi/*.o test-app/*.o src/x86/*.o
-	$(Q)rm -f lib/wolfssl/wolfcrypt/src/*.o lib/wolfTPM/src/*.o lib/wolfTPM/hal/*.o
+	$(Q)rm -f lib/wolfssl/wolfcrypt/src/*.o lib/wolfTPM/src/*.o
 	$(Q)rm -f wolfboot.bin wolfboot.elf wolfboot.map test-update.rom wolfboot.hex
 	$(Q)rm -f $(MACHINE_OBJ) $(MAIN_TARGET) $(LSCRIPT)
 	$(Q)rm -f $(OBJS)

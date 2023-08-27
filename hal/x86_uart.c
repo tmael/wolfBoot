@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* x86_uart.c
  *
  * Implementation of a very basic 8250 UART driver for x86
@@ -56,21 +59,6 @@
 
 
 #ifdef X86_UART_MMIO
-
-#if X86_UART_REG_WIDTH != 4
-#error "x86_uart: reg width not supported"
-#endif /* X86_UART_REG_WIDTH != 4 */
-
-static void write_reg(uint32_t address, uint8_t value)
-{
-    mmio_write32(address, value);
-}
-static uint8_t read_reg(uint32_t address)
-{
-    uint32_t reg;
-    reg = mmio_read32(address);
-    return (uint8_t)(reg & 0xff);
-}
 #else
 static void write_reg(uint32_t port, uint8_t value)
 {

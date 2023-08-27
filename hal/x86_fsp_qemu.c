@@ -1,3 +1,6 @@
+#ifdef USER_SETTINGS_TRIMMING_DO178
+#include <user_settings_do178.h>
+#endif
 /* x86_fsp_qemu.c
  *
  * Copyright (C) 2023 wolfSSL Inc.
